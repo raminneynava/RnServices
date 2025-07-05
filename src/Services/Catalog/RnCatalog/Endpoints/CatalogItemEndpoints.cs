@@ -5,12 +5,12 @@ using FluentValidation;
 
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
-using RnCatalog.Infrastructure.IntegrationEvents;
 using RnCatalog.Endpoints.Contracts;
 using RnCatalog.Models;
 using RnCatalog.Services;
 using MassTransit;
 using RnCatalog.Infrastructure.Extensions;
+using IntegrationEvents;
 
 public static class CatalogItemEndpoints
 {
@@ -67,18 +67,18 @@ public static class CatalogItemEndpoints
         await services.Context.SaveChangesAsync(cancellationToken);
 
         var detailUrl = $"/catalog/api/v1/items/{item.Slug}";
-        //var loadedItem = await services.Context.CatalogItems
-        //                                            .Include(ci => ci.CatalogBrand)
-        //                                            .Include(ci => ci.CatalogCategory)
-        //                                            .FirstAsync(x => x.Slug == item.Slug);
+        var loadedItem = await services.Context.CatalogItems
+                                                    .Include(ci => ci.CatalogBrand)
+                                                    .Include(ci => ci.CatalogCategory)
+                                                    .FirstAsync(x => x.Slug == item.Slug);
 
-        //await services.Publish.Publish(new CatalogItemAddedEvent(
-        //        loadedItem.Name,
-        //        loadedItem.Description,
-        //        loadedItem.CatalogCategory.Category,
-        //        loadedItem.CatalogBrand.Brand,
-        //        loadedItem.Slug,
-        //        detailUrl));
+        await services.Publish.Publish(new CatalogItemAddedEvent(
+                loadedItem.Name,
+                loadedItem.Description,
+                loadedItem.CatalogCategory.Category,
+                loadedItem.CatalogBrand.Brand,
+                loadedItem.Slug,
+                detailUrl));
 
         return TypedResults.Created(detailUrl);
     }

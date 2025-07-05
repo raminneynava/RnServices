@@ -25,4 +25,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\common\IntegrationEvents\IntegrationEvents.csproj" />
+  </ItemGroup>
+
 </Project>

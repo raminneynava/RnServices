@@ -19,6 +19,11 @@ namespace RnCatalog.Models
 
         public int MaxStockThreshold { get; private set; }
 
+        public int CatalogCategoryId { get; private set; }
+
+        public int CatalogBrandId { get; private set; }
+
+
         public ICollection<CatalogMedia> Medias { get; private set; } = [];
 
         public static CatalogItem Create(string name, string description, int maxStockThreshold, int brandId, int categoryId, decimal price = default)
@@ -54,11 +59,9 @@ namespace RnCatalog.Models
 
         public CatalogBrand CatalogBrand { get; private set; } = null!;
 
-        public int CatalogBrandId { get; private set; }
 
         public CatalogCategory CatalogCategory { get; private set; } = null!;
 
-        public int CatalogCategoryId { get; private set; }
 
         public int RemoveStock(int quantity)
         {

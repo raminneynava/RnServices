@@ -1,5 +1,5 @@
-﻿namespace RnCatalog.Infrastructure.IntegrationEvents;
-  
+﻿namespace IntegrationEvents;
+
 public record CatalogItemChangedEvent(
     string Name,
     string Description,
