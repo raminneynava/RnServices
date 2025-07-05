@@ -1,0 +1,21 @@
+@ApiGatetway_HostAddress = http://localhost:5199
+
+GET {{ApiGatetway_HostAddress}}/catalog/api/v1/brands
+Accept: application/json
+
+###
+GET {{ApiGatetway_HostAddress}}/search/api/v1/Fuzzy?qr=rami
+Accept: application/json
+
+###
+POST {{ApiGatetway_HostAddress}}/catalog/api/v1/items
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "rami",
+  "description": "ramin",
+  "catalogId": 1,
+  "brandId": 1,
+  "maxStockThreshold": 1
+}
