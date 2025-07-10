@@ -1,0 +1,6 @@
+@IDP.Api_HostAddress = http://localhost:5058
+
+GET {{IDP.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
